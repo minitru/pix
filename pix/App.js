@@ -1,5 +1,41 @@
 import React from 'react';
-import { StyleSheet, Text, View, FlatList, Image, TouchableOpacity } from 'react-native';
+import { Button, StyleSheet, Text, View, FlatList, Image, TouchableOpacity } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+
+function HomeScreen({ navigation }) {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Home Screen</Text>
+      <Button
+        title="Go to Details"
+        onPress={() => navigation.navigate('Details')}
+      />
+      <Button
+        title="Go to Camera"
+        onPress={() => navigation.navigate('Camera')}
+      />
+    </View>
+  );
+}
+
+function DetailsScreen() {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Details Screen</Text>
+    </View>
+  );
+}
+
+function CameraScreen() {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Camera Screen</Text>
+    </View>
+  );
+}
+
+const Stack = createStackNavigator();
 
 function Item({ item }) {
   return (
@@ -15,8 +51,23 @@ function Item({ item }) {
     </View>
   );
 }
+// CHANGED DetailsScreen component to XApp to show other display
+// ADD NEW SCREENS TO NAVIGATE TO HERE
+function App() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+      <Stack.Screen name="Home" component={HomeScreen} options={{ title: 'Overview' }} />
+        <Stack.Screen name="Details" component={XApp} />
+        <Stack.Screen name="Camera" component={CameraScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
 
-export default class App extends React.Component {
+export default App;
+
+export class XApp extends React.Component {
   state = {
     data:[
         {
